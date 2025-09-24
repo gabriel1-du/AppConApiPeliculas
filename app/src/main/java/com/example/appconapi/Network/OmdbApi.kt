@@ -8,10 +8,11 @@ import com.example.appconapi.BuildConfig
 
 interface OmdbApi {
 
-    @GET("/")
+    @GET("/") // Endpoint para buscar una película por título
     suspend fun getMovie(
-        @Query("t") title: String,
-        @Query("apikey") apiKey: String = BuildConfig.OMDB_API_KEY
+        @Query("t") title: String, // Título de la película
+        @Query("y") year: String?, // Año opcional
+        @Query("apikey") apiKey: String = BuildConfig.OMDB_API_KEY // Clave de API
 
     ): MovieResponse
 }
