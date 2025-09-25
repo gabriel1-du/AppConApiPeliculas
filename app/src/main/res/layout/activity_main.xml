@@ -7,43 +7,58 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="16dp">
+    <!-- Campo para ingresar el título de la película -->
 
-        <EditText
-            android:id="@+id/editTextMovie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:height="48dp"
-            android:hint="Ingresa el nombre de la película" />
+    <!-- Campo para ingresar el año -->
+    <EditText
+        android:id="@+id/editTextMovie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="324dp"
+        android:hint="Nombre de la película"
+        android:inputType="text"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editTextYear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingrese desde qué año buscar"
-            android:inputType="number"
-            android:visibility="gone" />
+    <EditText
+        android:id="@+id/editTextYear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Año de la película"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/editTextMovie"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="12dp"
+        android:visibility="gone"/> <!-- inicialmente oculto -->
 
-        <CheckBox
-            android:id="@+id/checkboxYearFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Usar filtro de año" />
+    <!-- CheckBox para habilitar el filtro por año -->
 
-        <Button
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buscar" />
+    <!-- Botón para buscar -->
 
-    </LinearLayout>
+    <CheckBox
+        android:id="@+id/checkboxYearFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="80dp"
+        android:text="Filtrar por año"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextYear" />
 
-
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="Buscar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkboxYearFilter" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

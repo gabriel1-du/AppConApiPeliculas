@@ -1,9 +1,5 @@
 package com.example.appconapi
 
-
-import androidx.activity.enableEdgeToEdge
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -11,6 +7,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 
 
 
@@ -19,36 +16,50 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val editTextMovie = findViewById<EditText>(R.id.editTextMovie) //Nombre pelicula
-        val edtiTextYear = findViewById<EditText>(R.id.editTextYear)
-        val buttonSearch = findViewById<Button>(R.id.buttonSearch) //Boton de busqueda
-        val checkBox = findViewById<CheckBox>(R.id.checkboxYearFilter) //Checkbox
+        val editTextMovie = findViewById<EditText>(R.id.editTextMovie) // Nombre de la película
+        val editTextYear = findViewById<EditText>(R.id.editTextYear)   // Año de la película
+        val buttonSearch = findViewById<Button>(R.id.buttonSearch)     // Botón de búsqueda
+        val checkBox = findViewById<CheckBox>(R.id.checkboxYearFilter) // Checkbox
+
+        // Mostrar u ocultar el campo de año según el estado del CheckBox
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            editTextYear.visibility = if (isChecked) View.VISIBLE else View.GONE //Cambio visibilidad
+        }
 
         buttonSearch.setOnClickListener {
-            //Variables para guardar los datos ingresados
-            val movieTitle = editTextMovie.text.toString().trim() //Nombre de la pelicula
-            val year = edtiTextYear.text.toString().trim() //Año de la pelicula
 
-            if (movieTitle.isNotEmpty()) { //verificacion del campo nombre de pelicula
-                if (checkBox.isChecked) { // verificacion de checkbox
+            // Variables para guardar los datos ingresados
+            val movieTitle = editTextMovie.text.toString().trim() //guarda el titulo
+            val year = editTextYear.text.toString().trim() //guarda el año
+
+            if (movieTitle.isNotEmpty()) { // Verificación del campo nombre
+                if (checkBox.isChecked) { // Si el filtro de año está activado
                     if (year.isNotEmpty()) {
                         val intent = Intent(this, DetailActivity::class.java)
                         intent.putExtra("MOVIE_TITLE", movieTitle)
                         intent.putExtra("MOVIE_YEAR", year)
+                        intent.putExtra("USE_YEAR_FILTER", true) ////aplicacion de filtro
                         startActivity(intent)
                     } else {
-                        // CheckBox está marcado pero sin año =
-                        Toast.makeText(this, "Por favor, ingresa un año si el filtro está activado.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Por favor, ingresa un año si el filtro está activado.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else { // Si el checkbox no está marcado
                     val intent = Intent(this, DetailActivity::class.java)
                     intent.putExtra("MOVIE_TITLE", movieTitle)
+                    intent.putExtra("USE_YEAR_FILTER", false)
                     startActivity(intent)
                 }
             } else {
-                // Mensaje de que el texto este vacio
-                Toast.makeText(this, "Por favor, ingresa el título de la película.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Por favor, ingresa el título de la película.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        } // fin button search
-    } // fin
+        }
+    }
 }
