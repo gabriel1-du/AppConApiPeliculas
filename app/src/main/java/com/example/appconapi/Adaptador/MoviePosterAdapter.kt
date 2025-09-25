@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+
 import com.bumptech.glide.Glide
 import com.example.appconapi.R // Importa R de tu módulo principal
 import com.example.appconapi.Data.MovieResponse // Importa tu clase Movie
@@ -21,23 +23,33 @@ class MoviePosterAdapter(private var movieItems: List<MovieResponse>) :
 
     inner class MoviePosterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { //Imagen
         val posterImage: ImageView = itemView.findViewById(R.id.movie_poster_image)
+        val titleText: TextView = itemView.findViewById(R.id.movie_title_text)
     }
 
+    //funcion para crear la vista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviePosterViewHolder {
         val view = LayoutInflater.from(parent.context)
             //extrae imagen desde la actividad
             .inflate(R.layout.item_poster_layout, parent, false)
         return MoviePosterViewHolder(view)
     }
-    override fun onBindViewHolder(holder: MoviePosterViewHolder, position: Int) {
-        val movie = movieItems[position] // Ahora es un objeto MovieResponse
 
-        // Usar Glide para cargar la imagen desde la URL en el ImageView
-        // Accede al campo 'Poster' de tu MovieResponse
+
+
+    //funcion que crea la vista en el recycle
+    override fun onBindViewHolder(holder: MoviePosterViewHolder, position: Int) {
+        val movie = movieItems[position]
+
+        // Cargar imagen del póster con Glide
         Glide.with(holder.itemView.context)
-            .load(movie.Poster) // <-- CAMBIO AQUÍ: usa movie.Poster
+            .load(movie.Poster)
             .into(holder.posterImage)
+
+        // Establecer el título de la película
+        // Verifica si el título es nulo o vacío si es necesario
+        holder.titleText.text = movie.Title ?: "Título no disponible" // <-- AÑADE ESTO
     }
+
     override fun getItemCount(): Int {
         return movieItems.size
     }
@@ -50,4 +62,6 @@ class MoviePosterAdapter(private var movieItems: List<MovieResponse>) :
         movieItems = newMovieItems
         notifyDataSetChanged()
     }
+
+
 }
