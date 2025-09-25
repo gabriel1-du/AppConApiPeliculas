@@ -15,9 +15,6 @@ private lateinit var movieAdapter: MoviePosterAdapter
 class MainActivityHome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        movieAdapter = MoviePosterAdapter(movieResponseList) // Inicialmente puede estar vacía
-        recyclerView.adapter = movieAdapter
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_home)
