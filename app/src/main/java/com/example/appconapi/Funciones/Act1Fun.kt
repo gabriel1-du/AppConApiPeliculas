@@ -23,13 +23,13 @@ fun showMovie(context: Context, binding: ActivityDetailBinding, response: MovieR
 }
 
 // Buscar solo por título
-fun fetchMovie(context: Context, binding: ActivityDetailBinding, title: String) {
+fun fetchMovie(context: Context, binding: ActivityDetailBinding, title: String, onResult: (MovieResponse) -> Unit) {
     CoroutineScope(Dispatchers.IO).launch {
         try {
             val response = RetrofitInstance.api.getMovie(title, null)
-
             withContext(Dispatchers.Main) {
                 showMovie(context, binding, response)
+                onResult(response) // <- aquí guardamos la película
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
@@ -40,7 +40,13 @@ fun fetchMovie(context: Context, binding: ActivityDetailBinding, title: String) 
 }
 
 // Buscar por título y año
-fun fetchMovieAndYear(context: Context, binding: ActivityDetailBinding, title: String, year: String) {
+fun fetchMovieAndYear(
+    context: Context,
+    binding: ActivityDetailBinding,
+    title: String,
+    year: String,
+    onResult: (MovieResponse) -> Unit
+) {
     CoroutineScope(Dispatchers.IO).launch {
         try {
             val response = RetrofitInstance.api.getMovie(title, year)
@@ -53,6 +59,8 @@ fun fetchMovieAndYear(context: Context, binding: ActivityDetailBinding, title: S
 
                     binding.textYear.text = "Año: ${response.Year}"
                     binding.textActors.text = "Actores: ${response.Actors}"
+
+                    onResult(response) // 🔹 Guardamos la película en currentMovieResponse
                 } else {
                     binding.textYear.text = "No se encontró la película para '$title' en el año $year"
                     binding.textActors.text = ""

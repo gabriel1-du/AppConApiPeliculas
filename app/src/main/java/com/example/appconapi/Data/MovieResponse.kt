@@ -5,5 +5,6 @@ data class MovieResponse(
     val Poster: String,
     val Year: String,
     val Actors: String,
+    val imdbID : String?,
     val Response: String?
 )
