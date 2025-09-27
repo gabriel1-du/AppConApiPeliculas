@@ -14,13 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppConApi">
         <activity
+            android:name=".Vistas.FavMovieActivity"
+            android:exported="false" />
+        <activity
             android:name=".Vistas.MainActivityHome"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".Vistas.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Vistas.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

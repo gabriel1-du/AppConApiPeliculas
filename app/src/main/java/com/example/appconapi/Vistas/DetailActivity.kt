@@ -1,12 +1,10 @@
-package com.example.appconapi
+package com.example.appconapi.Vistas
 
 import android.os.Bundle
-
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appconapi.Funciones.fetchMovie
 import com.example.appconapi.Funciones.fetchMovieAndYear
 import com.example.appconapi.databinding.ActivityDetailBinding
-
 
 class DetailActivity : AppCompatActivity() {
 

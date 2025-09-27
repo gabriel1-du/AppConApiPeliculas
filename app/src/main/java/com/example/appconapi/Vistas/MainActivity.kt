@@ -1,23 +1,21 @@
-package com.example.appconapi
+package com.example.appconapi.Vistas
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appconapi.Adaptador.MovieAdapter
 import com.example.appconapi.Data.MovieItem
 import com.example.appconapi.Network.RetrofitInstance
+import com.example.appconapi.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         recyclerView.adapter = adapter
-        
+
 
         // Botón buscar
         buttonSearch.setOnClickListener {
@@ -86,4 +84,3 @@ class MainActivity : AppCompatActivity() {
         }
         }
 }
-
