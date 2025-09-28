@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val editTextMovie = findViewById<EditText>(R.id.editTextMovie)
         val editTextYear = findViewById<EditText>(R.id.editTextYear)
         val buttonSearch = findViewById<Button>(R.id.buttonSearch)
+        val buttonListaFav = findViewById<Button>(R.id.buttonListaFav)
 
         // Inicializar RecyclerView
         recyclerView = findViewById(R.id.recyclerMovies)
@@ -82,5 +83,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor, ingresa el título de la película.", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Botón lista de favoritos
+        buttonListaFav.setOnClickListener {
+            val intent = Intent(this, FavMovieActivity::class.java)
+            startActivity(intent)
         }
+
+    }
 }
